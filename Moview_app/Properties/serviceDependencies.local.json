@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql.local",
+      "connectionId": "Moview_appContext"
+    },
+    "mssql2": {
+      "type": "mssql.local",
+      "connectionId": "AnotherContext"
+    },
+    "mssql3": {
+      "type": "mssql.local",
+      "connectionId": "Login_outContextConnection"
+    },
+    "mssql4": {
+      "type": "mssql.local",
+      "connectionId": "LogContextConnection"
+    },
+    "mssql5": {
+      "type": "mssql.local",
+      "connectionId": "ApplicationContextConnection"
+    },
+    "mssql6": {
+      "type": "mssql.local",
+      "connectionId": "LoginContextConnection"
+    }
+  }
+}

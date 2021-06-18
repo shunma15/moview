@@ -1,0 +1,47 @@
+﻿@page
+@model Moview_app.Pages.AddmovieModel
+
+@{
+    ViewData["Title"] = "Addmovie";
+}
+
+<div class="layout">
+<h1>作品の追加</h1>
+<hr />
+        <form method="post" class="another-page">
+            <p class="h5">*は必須の項目です。</p>
+            <div class="form-group">
+                <label asp-for="Movie.Title" class="control-label">タイトル*</label>
+                <input asp-for="Movie.Title" class="form-control" />
+            </div>
+            <div class="form-group">
+               <label asp-for="Movie.Genre" class="control-label">ジャンル</label>
+               <select class="form-control" asp-for="Movie.Genre">
+                   <option value="アクション">アクション</option>
+                   <option value="アドベンチャー">アドベンチャー</option>
+                   <option value="コメディ">コメディ</option>
+                   <option value="ホラー">ホラー</option>
+                   <option value="SF映画">SF映画</option>
+                   <option value="ミステリー">ミステリー</option>
+               </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movie.Actor" class="control-label">主演</label>
+                <input asp-for="Movie.Actor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Movie.Director" class="control-label">監督</label>
+                <input asp-for="Movie.Director" class="form-control" />
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="追加" class="btn-large" />
+            </div>
+        </form>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

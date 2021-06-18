@@ -1,0 +1,114 @@
+﻿@page
+@model Moview_app.Pages.HomepageModel
+@{
+
+}
+
+<div class="header-card">
+    <label class="h1">Moview</label>
+    <ul class="list-style">
+        <li>
+            <input type="submit" id="loginbtn" onclick="location.href = './Account/Login'"
+                   value="ログイン" class="btn-large header-btn" />
+        </li>
+        <li>
+            <input type="submit" id="newregbtn" onclick="location.href='./newmem'"
+                   value="アカウント作成" class="btn-large header-btn" />
+        </li>
+        <li class="loginname h5">
+            @if(User.Identity.IsAuthenticated)
+            {
+            <p>
+              <text>ようこそ,</text> @Model.Name <text>さん。</text>
+            </p>
+            }
+        </li>
+    </ul>
+</div>
+
+<input type="radio" id="movie" name="tab_item" checked />
+<label class="tab-style tabs" for="movie">映画</label>
+<input type="radio" id="account" name="tab_item" />
+<label class="tab-style tabs" for="account">アカウント</label>
+
+<div class="tab-body text-center" id="movie_con">
+    <input type="submit" value="作品の追加"
+           onclick="location.href='./addmovie'" class="btn-large" />
+    <br /><hr />
+<form method="post">
+    <div>
+        <p class="h5" style="color: white;">*レビューをするには作品名をクリックしてください。</p>
+        <p>
+        <input type="text" name="search" class="search-box" placeholder="作品名,ジャンルなど" />
+        <input type="submit" value="検索"class="btn-small" />
+        </p>
+    </div>
+</form> 
+    @foreach(var item in Model.Movie)
+            {
+                  <div class="main-design">
+                      <a asp-page="./Assessment" id="anchor" asp-route-id="@item.ID">
+                         <h3>@Html.DisplayFor(modelItem => item.Title)</h3>
+                          @foreach(var value in Model.Assessment)
+                          {
+                              if(item.ID == value.MovieID)
+                               {
+                                  <span class="star5_rating"data-rate="@Model.Average(item.ID)">@Model.Average(item.ID)</span>
+                                  break;
+                              }
+                          }
+                         <div class="h5">
+                             <span class="h4">ジャンル:</span> 
+                             @Html.DisplayFor(modelItem => item.Genre)<br />
+                             <span class="h4">主演:</span> 
+                             <text>「</text>@Html.DisplayFor(modelItem => item.Actor) <text>」</text><br />
+                             <span class="h4">監督:</span> 
+                             <text>「</text>@Html.DisplayFor(modelItem => item.Director) <text>」</text>
+                         </div>
+                      </a>
+                     @foreach (var com in Model.Assessment)
+                     {
+                         @if (item.ID == com.MovieID)
+                         {
+                             <section class="card">
+                                 <span class="card-content">
+                                     <label class="card-text">@com.Username</label>
+                                        <span class="star5_rating"data-rate="@com.Value">@com.Value</span>
+                                         <br />
+                                         <label class="h6">@com.Date</label> 
+                                         <br />
+                                         <span class="card-text">
+                                             @Html.DisplayFor(comItem => com.Posting)
+                                         </span>
+                                 </span>
+                             </section>
+                          }
+                     }
+                   <hr />
+                  </div>
+            }
+</div>
+<div class="tab-body text-center main-design" id="account_con">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        {
+                  <div class="main-com text-center">
+                      <input type="hidden" asp-for="@Model.ID" />
+                      <div class="h3" style="color: black;">[ユーザー名]</div><br />
+                         <p class="h4 bottom-up">@Html.DisplayFor(x => x.Name)</p>
+                      <div class="h3" style="color: black;">[性 別]</div><br />
+                         <p class="h4 bottom-up">@Html.DisplayFor(x => x.Gender)</p>
+                      <div class="h3" style="color: black;">[年 齢]</div><br />
+                         <p class="h4 bottom-up">@Html.DisplayFor(x => x.Age) 歳</p>
+                      <input type="submit" value="アカウントの編集" class="btn-large tab-design"
+                             onclick="location.href='./Account/EditAccount'"/>
+                  </div>
+            
+        }
+    }
+    else
+    {
+    <p style="color: red;" class="h5">@Model.Message</p>
+    }
+</div>

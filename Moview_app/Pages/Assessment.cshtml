@@ -1,0 +1,67 @@
+﻿@page
+@model Moview_app.Pages.AssessmentModel
+
+@{
+    ViewData["Title"] = "Assessment";
+}
+
+<div class="layout">
+<h1>レビュー</h1>
+<h2>[@Html.DisplayFor(m => m.Movie.Title)]</h2>
+<hr />
+
+@if (User.Identity.IsAuthenticated)
+{
+<form method="post" class="another-page">
+    <input type="hidden" asp-for="Movie.ID" /><input type="hidden" asp-for="Account.ID" />
+    <input type="hidden" asp-for="Movie.Title" /><input type="hidden" asp-for="Movie.Genre" />
+    <input type="hidden" asp-for="Movie.Actor" /><input type="hidden" asp-for="Movie.Director" />
+    <input type="hidden" asp-for="Account.Username" />
+
+    <div class="form-group fiveStar">
+        <input type="radio" value="5" id="star1" asp-for="Assessment.Value" />
+        <label asp-for="Assessment.Value" for="star1" class="star">
+            ★
+        </label>
+        <input type="radio" value="4" id="star2" asp-for="Assessment.Value" />
+        <label asp-for="Assessment.Value" for="star2" class="star">
+            ★
+        </label>
+        <input type="radio" value="3" id="star3" asp-for="Assessment.Value" />
+        <label asp-for="Assessment.Value" for="star3" class="star">
+            ★
+        </label>
+        <input type="radio" value="2" id="star4" asp-for="Assessment.Value" />
+        <label asp-for="Assessment.Value" for="star4" class="star">
+            ★
+        </label>
+        <input type="radio" value="1" id="star5" asp-for="Assessment.Value" />
+        <label asp-for="Assessment.Value" for="star5" class="star">
+            ★
+        </label>
+    </div>
+        <p class="h-25">*５段階で評価</p>
+
+
+    <div class="form-group">
+        <label asp-for="Assessment.Posting" class="control-label h5">コメント</label>
+        <input asp-for="Assessment.Posting" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="投稿" class="btn-large" />
+    </div>
+</form>
+}
+     else
+        {
+            <a asp-page="/newreg" class="h5 text-center" style="color: red;">
+                @Model.Message
+            </a>
+        }
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

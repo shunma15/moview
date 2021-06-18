@@ -1,0 +1,37 @@
+﻿@page
+@model Moview_app.Pages.Account.EditAccountModel
+
+@{
+    ViewData["Title"] = "EditAccount";
+}
+
+<div class="layout">
+<h1>アカウントの編集</h1>
+<hr />
+        <form method="post" class="another-page">
+            <input type="hidden" asp-for="Account.ID" />
+            <div class="form-group">
+                <label asp-for="Account.Username" class="control-label">ユーザー名</label>
+                <input asp-for="Account.Username" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Account.Age" class="control-label">年齢</label>
+                <input asp-for="Account.Age" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Account.Gender" class="control-label">性別</label>
+                <select asp-for="Account.Gender" class="form-control">
+                    <option value="男性">男性</option>
+                    <option value="女性">女性</option>
+                </select>
+            </div>
+                <input type="hidden" asp-for="Account.Pass" />
+            <div class="form-group">
+                <input type="submit" value="保存" class="btn-large" />
+            </div>
+        </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

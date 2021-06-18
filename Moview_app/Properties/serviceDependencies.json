@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "Moview_appContext"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "AnotherContext"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "Login_outContextConnection"
+    },
+    "mssql4": {
+      "type": "mssql",
+      "connectionId": "LogContextConnection"
+    },
+    "mssql5": {
+      "type": "mssql",
+      "connectionId": "ApplicationContextConnection"
+    },
+    "mssql6": {
+      "type": "mssql",
+      "connectionId": "LoginContextConnection"
+    }
+  }
+}
